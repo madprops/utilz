@@ -28,7 +28,8 @@ Utilz.remove_multiple_empty_lines = function (s, level = 1) {
       }
 
       charge += 1
-    } else {
+    }
+    else {
       charge = 0
       ns.push(line)
     }
@@ -47,7 +48,8 @@ Utilz.remove_pre_empty_lines = function (s) {
   for (let line of split) {
     if (line.trim()) {
       return split.slice(counter).join("\n")
-    } else {
+    }
+    else {
       counter += 1
     }
   }
@@ -66,7 +68,8 @@ Utilz.get_random_int = function (min, max, exclude = undefined) {
     if (num === exclude) {
       if (num + 1 <= max) {
         num = num + 1
-      } else if (num - 1 >= min) {
+      }
+      else if (num - 1 >= min) {
         num = num - 1
       }
     }
@@ -135,7 +138,8 @@ Utilz.get_youtube_id = function (url) {
     }
 
     return ["list", [list_id, index]]
-  } else if (v_id) {
+  }
+  else if (v_id) {
     return ["video", v_id]
   }
 }
@@ -164,11 +168,14 @@ Utilz.get_youtube_time = function (url) {
 
       if (match.includes("h")) {
         h = parseInt(match.replace("h", ""))
-      } else if (match.includes("m")) {
+      }
+      else if (match.includes("m")) {
         m = parseInt(match.replace("m", ""))
-      } else if (match.includes("s")) {
+      }
+      else if (match.includes("s")) {
         s = parseInt(match.replace("s", ""))
-      } else {
+      }
+      else {
         t = parseInt(match)
       }
 
@@ -193,7 +200,8 @@ Utilz.get_youtube_time = function (url) {
     }
 
     return time
-  } else {
+  }
+  else {
     return 0
   }
 }
@@ -205,9 +213,11 @@ Utilz.get_twitch_id = function (url) {
   if (match) {
     if (match[0].includes("twitch.tv/videos/")) {
       return ["video", match[1]]
-    } else if (match[0].includes("clips.twitch.tv")) {
+    }
+    else if (match[0].includes("clips.twitch.tv")) {
       return
-    } else {
+    }
+    else {
       return ["channel", match[1]]
     }
   }
@@ -254,7 +264,8 @@ Utilz.get_extension = function (s) {
     if (matches) {
       return matches[1]
     }
-  } else {
+  }
+  else {
     let matches = s.match(/\.(\w+)(?=$|[#?])/)
 
     if (matches) {
@@ -271,7 +282,8 @@ Utilz.validate_hex = function (hex, case_sensitive = true) {
 
   if (case_sensitive) {
     re = /^#[0-9a-f]{6}$/
-  } else {
+  }
+  else {
     re = /^#[0-9A-F]{6}$/i
   }
 
@@ -306,9 +318,11 @@ Utilz.nice_list = function (list) {
 
     if (i === 0) {
       s = item
-    } else if (i === list.length - 1) {
+    }
+    else if (i === list.length - 1) {
       s = `${s} and ${item}`
-    } else {
+    }
+    else {
       s = `${s}, ${item}`
     }
   }
@@ -321,9 +335,11 @@ Utilz.is_url = function (s) {
   if (s.startsWith("http://") || s.startsWith("https://")) {
     if (s.endsWith("]")) {
       return false
-    } else if (s.endsWith("\"")) {
+    }
+    else if (s.endsWith("\"")) {
       return false
-    } else if (s.endsWith("'")) {
+    }
+    else if (s.endsWith("'")) {
       return false
     }
 
@@ -379,7 +395,8 @@ Utilz.slice_string_end = function (s, n = 10) {
 
   if (s.length > sliced.length) {
     return `...${sliced}`
-  } else {
+  }
+  else {
     return sliced
   }
 }
@@ -404,7 +421,8 @@ Utilz.escape_special_characters = function (s) {
 Utilz.size_string = function (size, mode = 1) {
   if (mode === 1) {
     return `${parseFloat(size / 1024).toFixed(2)} MB`
-  } else if (mode === 2) {
+  }
+  else if (mode === 2) {
     return `${parseFloat(size / 1024 / 1024).toFixed(2)} MB`
   }
 }
@@ -420,7 +438,8 @@ Utilz.nice_time = function (date1, date2) {
 
   if (date1 > date2) {
     d = (date1 - date2)
-  } else {
+  }
+  else {
     d = (date2 - date1)
   }
 
@@ -431,13 +450,16 @@ Utilz.nice_time = function (date1, date2) {
 
     if (dm === 1) {
       nt = `${dm} second`
-    } else {
+    }
+    else {
       nt = `${dm} seconds`
     }
-  } else {
+  }
+  else {
     if (d === 1) {
       nt = `${d} millisecond`
-    } else {
+    }
+    else {
       nt = `${d} milliseconds`
     }
   }
@@ -451,7 +473,8 @@ Utilz.singular_or_plural = function (n, s) {
 
   if (n === 1) {
     ss = `${n} ${s.substring(0, s.length - 1)}`
-  } else {
+  }
+  else {
     ss = `${n} ${s}`
   }
 
@@ -496,7 +519,8 @@ Utilz.get_limited_string = function (s, n) {
 
   if (s.length > n) {
     title = `${s.substring(0, n)}...`
-  } else {
+  }
+  else {
     title = s
   }
 
@@ -540,7 +564,8 @@ Utilz.string_similarity_distance = function (s1, s2) {
     for (let j = 0; j <= s2.length; j++) {
       if (i == 0) {
         costs[j] = j
-      } else {
+      }
+      else {
         if (j > 0) {
           let new_value = costs[j - 1]
 
@@ -581,7 +606,7 @@ Utilz.untab_string = function (s) {
     }
 
     let m = line.match(/^\s+/)
-    
+
     if (m) {
       let n = m[0].length
 
@@ -590,7 +615,8 @@ Utilz.untab_string = function (s) {
       }
 
       ns.push(n)
-    } else {
+    }
+    else {
       return s
     }
   }
@@ -622,23 +648,28 @@ Utilz.timeago = function (date) {
 
   if (diff < Utilz.MINUTE) {
     s = "just now"
-  } else if (diff < Utilz.HOUR) {
+  }
+  else if (diff < Utilz.HOUR) {
     let n = Math.floor(diff / 60 / 1000)
 
     if (n === 1) {
       s = `${n} minute ago`
-    } else {
+    }
+    else {
       s = `${n} minutes ago`
     }
-  } else if (diff >= Utilz.HOUR && diff < Utilz.DAY) {
+  }
+  else if (diff >= Utilz.HOUR && diff < Utilz.DAY) {
     let n = Math.floor(diff / 60 / 60 / 1000)
 
     if (n === 1) {
       s = `${n} hour ago`
-    } else {
+    }
+    else {
       s = `${n} hours ago`
     }
-  } else if (diff >= Utilz.DAY && diff < Utilz.YEAR) {
+  }
+  else if (diff >= Utilz.DAY && diff < Utilz.YEAR) {
     let n = Math.floor(diff / 24 / 60 / 60 / 1000)
 
     if (n === 1) {
@@ -646,12 +677,14 @@ Utilz.timeago = function (date) {
     } else {
       s = `${n} days ago`
     }
-  } else if (diff >= Utilz.YEAR) {
+  }
+  else if (diff >= Utilz.YEAR) {
     let n = Math.floor(diff / 365 / 24 / 60 / 60 / 1000)
 
     if (n === 1) {
       s = `${n} year ago`
-    } else {
+    }
+    else {
       s = `${n} years ago`
     }
   }
@@ -733,7 +766,7 @@ Utilz.number_range = function (to, from, increment) {
   while (n < 1000000) {
     numbers.push(n)
     n += increment
-    
+
     if (n > from) {
       break
     }
@@ -890,7 +923,8 @@ Utilz.dataset = function (el, value, setvalue) {
 
   if (setvalue !== undefined) {
     Utilz.dataset_obj[id][value] = setvalue
-  } else {
+  }
+  else {
     return Utilz.dataset_obj[id][value]
   }
 }
