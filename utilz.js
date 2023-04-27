@@ -1044,7 +1044,7 @@ Utilz.remove_protocol = (url) => {
   return url.replace(/^https?:\/\//, ``)
 }
 
-App.log = (message, mode = `normal`) => {
+Utilz.log = (message, mode = `normal`) => {
   let icon
 
   if (mode === `normal`) {
@@ -1057,11 +1057,11 @@ App.log = (message, mode = `normal`) => {
   console.info(`${icon} Log: ${message}`)
 }
 
-App.bool = (string) => {
+Utilz.bool = (string) => {
   return string.toLowerCase() === `true`
 }
 
-App.unquote = (text) => {
+Utilz.unquote = (text) => {
   return text.replace(/^"(.*)"$/, `$1`)
 }
 
