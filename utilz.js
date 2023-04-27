@@ -1,28 +1,28 @@
 const Utilz = {}
 
 // Clean string util
-Utilz.single_space = function (s) {
-  return s.replace(/\s+/g, " ").trim()
+Utilz.single_space = (s) => {
+  return s.replace(/\s+/g, ` `).trim()
 }
 
 // Clean string util
-Utilz.clean_username = function (s) {
-  return s.replace(/[^a-z0-9]+/gi, "").replace(/ +/g, " ").trim()
+Utilz.clean_username = (s) => {
+  return s.replace(/[^a-z0-9]+/gi, ``).replace(/ +/g, ` `).trim()
 }
 
 // Clean string util
-Utilz.no_space = function (s) {
-  return s.replace(/\s+/g, "").trim()
+Utilz.no_space = (s) => {
+  return s.replace(/\s+/g, ``).trim()
 }
 
 // Replace multiple empty lines with a single one
-Utilz.remove_multiple_empty_lines = function (s, level = 1) {
+Utilz.remove_multiple_empty_lines = (s, level = 1) => {
   let ns = []
   let charge = 0
-  let split = s.split("\n")
+  let split = s.split(`\n`)
 
   for (let line of split) {
-    if (line.trim() === "") {
+    if (line.trim() === ``) {
       if (charge < level) {
         ns.push(line)
       }
@@ -35,19 +35,19 @@ Utilz.remove_multiple_empty_lines = function (s, level = 1) {
     }
   }
 
-  let pf = ns.join("\n")
+  let pf = ns.join(`\n`)
 
   return pf
 }
 
 // Remove empty lines from the start
-Utilz.remove_pre_empty_lines = function (s) {
-  let split = s.split("\n")
+Utilz.remove_pre_empty_lines = (s) => {
+  let split = s.split(`\n`)
   let counter = 0
 
   for (let line of split) {
     if (line.trim()) {
-      return split.slice(counter).join("\n")
+      return split.slice(counter).join(`\n`)
     }
     else {
       counter += 1
@@ -56,12 +56,12 @@ Utilz.remove_pre_empty_lines = function (s) {
 }
 
 // Clean string util
-Utilz.single_linebreak = function (s) {
-  return s.replace(/[\n\r]+/g, "\n").replace(/ +/g, " ").trim()
+Utilz.single_linebreak = (s) => {
+  return s.replace(/[\n\r]+/g, `\n`).replace(/ +/g, ` `).trim()
 }
 
 // Get a random int from min to max. Optional exclude a number
-Utilz.get_random_int = function (min, max, exclude = undefined) {
+Utilz.get_random_int = (min, max, exclude = undefined) => {
   let num = Math.floor(Math.random() * (max - min + 1) + min)
 
   if (exclude !== undefined) {
@@ -79,7 +79,7 @@ Utilz.get_random_int = function (min, max, exclude = undefined) {
 }
 
 // Shuffle an array
-Utilz.shuffle_array = function (array) {
+Utilz.shuffle_array = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1))
     let temp = array[i]
@@ -89,10 +89,10 @@ Utilz.shuffle_array = function (array) {
 }
 
 // Get a random string of n length
-Utilz.get_random_string = function (n) {
-  let text = ""
+Utilz.get_random_string = (n) => {
+  let text = ``
 
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  let possible = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
 
   for (let i = 0; i < n; i++) {
     text += possible[Utilz.get_random_int(0, possible.length - 1)]
@@ -102,8 +102,8 @@ Utilz.get_random_string = function (n) {
 }
 
 // Ge a random sequence of numbers
-Utilz.random_sequence = function (n) {
-  let s = ""
+Utilz.random_sequence = (n) => {
+  let s = ``
 
   for (let i = 0; i < n; i++) {
     s += Utilz.get_random_int(0, 9)
@@ -113,7 +113,7 @@ Utilz.random_sequence = function (n) {
 }
 
 // Get id of youtube video from url
-Utilz.get_youtube_id = function (url) {
+Utilz.get_youtube_id = (url) => {
   let v_id = false
   let list_id = false
 
@@ -127,25 +127,25 @@ Utilz.get_youtube_id = function (url) {
   let index_match = url.match(/(?:\?|&)(index=[0-9]+)/)
 
   if (list_match) {
-    list_id = list_match[1].replace("list=", "")
+    list_id = list_match[1].replace(`list=`, ``)
   }
 
   if (list_id && !v_id) {
     let index = 0
 
     if (index_match) {
-      index = parseInt(index_match[1].replace("index=", "")) - 1
+      index = parseInt(index_match[1].replace(`index=`, ``)) - 1
     }
 
-    return ["list", [list_id, index]]
+    return [`list`, [list_id, index]]
   }
   else if (v_id) {
-    return ["video", v_id]
+    return [`video`, v_id]
   }
 }
 
 // Get timestamp of a youtube video from url
-Utilz.get_youtube_time = function (url) {
+Utilz.get_youtube_time = (url) => {
   let matches = url.match(/[\?|&]t=(\d+h)?(\d+m)?(\d+s)?(\d+)?/)
 
   if (matches) {
@@ -166,14 +166,14 @@ Utilz.get_youtube_time = function (url) {
         continue
       }
 
-      if (match.includes("h")) {
-        h = parseInt(match.replace("h", ""))
+      if (match.includes(`h`)) {
+        h = parseInt(match.replace(`h`, ``))
       }
-      else if (match.includes("m")) {
-        m = parseInt(match.replace("m", ""))
+      else if (match.includes(`m`)) {
+        m = parseInt(match.replace(`m`, ``))
       }
-      else if (match.includes("s")) {
-        s = parseInt(match.replace("s", ""))
+      else if (match.includes(`s`)) {
+        s = parseInt(match.replace(`s`, ``))
       }
       else {
         t = parseInt(match)
@@ -207,36 +207,36 @@ Utilz.get_youtube_time = function (url) {
 }
 
 // Get twitch id from url
-Utilz.get_twitch_id = function (url) {
+Utilz.get_twitch_id = (url) => {
   let match = url.match(/.*twitch\.tv(?:\/videos)?\/(\w+)/)
 
   if (match) {
-    if (match[0].includes("twitch.tv/videos/")) {
-      return ["video", match[1]]
+    if (match[0].includes(`twitch.tv/videos/`)) {
+      return [`video`, match[1]]
     }
-    else if (match[0].includes("clips.twitch.tv")) {
+    else if (match[0].includes(`clips.twitch.tv`)) {
       return
     }
     else {
-      return ["channel", match[1]]
+      return [`channel`, match[1]]
     }
   }
 }
 
 // Round to specified decimal places
-Utilz.round = function (value, decimals) {
-  return Number(Math.round(value + "e" + decimals) + "e-" + decimals)
+Utilz.round = (value, decimals) => {
+  return Number(Math.round(value + `e` + decimals) + `e-` + decimals)
 }
 
 // Round to place or the place below
-Utilz.round2 = function (value, place) {
+Utilz.round2 = (value, place) => {
   return Math.round(value / place) * place
 }
 
 // Get a string with nice seconds format
-Utilz.humanize_seconds = function (input, separator = ":") {
-  let pad = function (input) {
-    return input < 10 ? "0" + input : input
+Utilz.humanize_seconds = (input, separator = `:`) => {
+  let pad = (input) => {
+    return input < 10 ? `0` + input : input
   }
 
   let result = [
@@ -249,16 +249,16 @@ Utilz.humanize_seconds = function (input, separator = ":") {
 }
 
 // Replace spaces with non-brekable spaces
-Utilz.nonbreak = function (s) {
-  return s.trim().split(" ").join("&nbsp;")
+Utilz.nonbreak = (s) => {
+  return s.trim().split(` `).join(`&nbsp;`)
 }
 
 // Extract extension from a string
-Utilz.get_extension = function (s) {
-  if (s.startsWith("http://") || s.startsWith("https://")) {
+Utilz.get_extension = (s) => {
+  if (s.startsWith(`http://`) || s.startsWith(`https://`)) {
     let u = new URL(s)
     let url = u.origin + u.pathname
-    let url_2 = url.split("//").slice(1).join("//")
+    let url_2 = url.split(`//`).slice(1).join(`//`)
     let matches = url_2.match(/\/.*\.(\w+)(?=$|[#?])/)
 
     if (matches) {
@@ -273,11 +273,11 @@ Utilz.get_extension = function (s) {
     }
   }
 
-  return ""
+  return ``
 }
 
 // Check if hex value is valid
-Utilz.validate_hex = function (hex, case_sensitive = true) {
+Utilz.validate_hex = (hex, case_sensitive = true) => {
   let re
 
   if (case_sensitive) {
@@ -291,7 +291,7 @@ Utilz.validate_hex = function (hex, case_sensitive = true) {
 }
 
 // Get the code from an imgur url
-Utilz.get_imgur_image_code = function (src) {
+Utilz.get_imgur_image_code = (src) => {
   let matches = src.match(/https?\:\/\/(?:i.)?imgur.com\/(\w{7,8})(?:\.\w+)?$/)
 
   if (matches) {
@@ -300,18 +300,18 @@ Utilz.get_imgur_image_code = function (src) {
 }
 
 // Capitalize words in a sentence
-Utilz.capitalize_words = function (s) {
+Utilz.capitalize_words = (s) => {
   let ns = s.toLowerCase()
-    .split(" ")
+    .split(` `)
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(" ")
+    .join(` `)
 
   return ns
 }
 
 // Make a string of nicely separated items
-Utilz.nice_list = function (list) {
-  let s = ""
+Utilz.nice_list = (list) => {
+  let s = ``
 
   for (let i = 0; i < list.length; i++) {
     let item = list[i]
@@ -331,15 +331,15 @@ Utilz.nice_list = function (list) {
 }
 
 // Check if string is a url
-Utilz.is_url = function (s) {
-  if (s.startsWith("http://") || s.startsWith("https://")) {
-    if (s.endsWith("]")) {
+Utilz.is_url = (s) => {
+  if (s.startsWith(`http://`) || s.startsWith(`https://`)) {
+    if (s.endsWith(`]`)) {
       return false
     }
-    else if (s.endsWith("\"")) {
+    else if (s.endsWith(`"`)) {
       return false
     }
-    else if (s.endsWith("'")) {
+    else if (s.endsWith(`'`)) {
       return false
     }
 
@@ -350,11 +350,11 @@ Utilz.is_url = function (s) {
 }
 
 // Get first url from a string
-Utilz.get_first_url = function (s) {
-  let split = s.split("\n")
+Utilz.get_first_url = (s) => {
+  let split = s.split(`\n`)
 
   for (let line of split) {
-    let split2 = line.split(" ")
+    let split2 = line.split(` `)
 
     for (let word of split2) {
       if (word) {
@@ -365,15 +365,15 @@ Utilz.get_first_url = function (s) {
     }
   }
 
-  return ""
+  return ``
 }
 
-Utilz.get_urls = function (s) {
+Utilz.get_urls = (s) => {
   let urls = []
-  let split = s.split("\n")
+  let split = s.split(`\n`)
 
   for (let line of split) {
-    let split2 = line.split(" ")
+    let split2 = line.split(` `)
 
     for (let word of split2) {
       if (word) {
@@ -388,7 +388,7 @@ Utilz.get_urls = function (s) {
 }
 
 // Crop a text from the left and add ...
-Utilz.slice_string_end = function (s, n = 10) {
+Utilz.slice_string_end = (s, n = 10) => {
   s = s.trim()
 
   let sliced = s.slice(-n).trim()
@@ -402,23 +402,23 @@ Utilz.slice_string_end = function (s, n = 10) {
 }
 
 // Replace a string between point start and point end with what
-Utilz.replace_between = function (str, start, end, what) {
+Utilz.replace_between = (str, start, end, what) => {
   return str.substring(0, start) + what + str.substring(end)
 }
 
 // Get a nice date string
 // Requires dateFormat.js
-Utilz.nice_date = function (date = Date.now()) {
-  return dateFormat(date, "dd/mmm/yy | h:MM:ss tt")
+Utilz.nice_date = (date = Date.now()) => {
+  return dateFormat(date, `dd/mmm/yy | h:MM:ss tt`)
 }
 
 // Escape special characters
-Utilz.escape_special_characters = function (s) {
-  return s.replace(/[^A-Za-z0-9]/g, "\\$&")
+Utilz.escape_regex = (s) => {
+  return s.replace(/[^A-Za-z0-9]/g, `\\$&`)
 }
 
 // Get a string with the size in megabytes
-Utilz.size_string = function (size, mode = 1) {
+Utilz.size_string = (size, mode = 1) => {
   if (mode === 1) {
     return `${parseFloat(size / 1024).toFixed(2)} MB`
   }
@@ -428,12 +428,12 @@ Utilz.size_string = function (size, mode = 1) {
 }
 
 // Check if object is empty
-Utilz.is_empty_object = function (obj) {
+Utilz.is_empty_object = (obj) => {
   return Object.keys(obj).length === 0 && obj.constructor === Object
 }
 
 // Get a nice datetime string
-Utilz.nice_time = function (date1, date2) {
+Utilz.nice_time = (date1, date2) => {
   let d
 
   if (date1 > date2) {
@@ -468,7 +468,7 @@ Utilz.nice_time = function (date1, date2) {
 }
 
 // Remove the s from a word if singular
-Utilz.singular_or_plural = function (n, s) {
+Utilz.singular_or_plural = (n, s) => {
   let ss
 
   if (n === 1) {
@@ -482,39 +482,39 @@ Utilz.singular_or_plural = function (n, s) {
 }
 
 // Check if it's a text element
-Utilz.is_textbox = function (element) {
+Utilz.is_textbox = (element) => {
   let tag_name = element.tagName.toLowerCase()
 
-  if (tag_name === "textarea") return true
-  if (tag_name !== "input") return false
+  if (tag_name === `textarea`) return true
+  if (tag_name !== `input`) return false
 
-  let type = element.getAttribute("type")
+  let type = element.getAttribute(`type`)
 
   if (!type) {
     return false
   }
 
   let input_types = [
-    "text",
-    "password",
-    "number",
-    "email",
-    "tel",
-    "url",
-    "search",
-    "date",
-    "datetime",
-    "datetime-local",
-    "time",
-    "month",
-    "week"
+    `text`,
+    `password`,
+    `number`,
+    `email`,
+    `tel`,
+    `url`,
+    `search`,
+    `date`,
+    `datetime`,
+    `datetime-local`,
+    `time`,
+    `month`,
+    `week`
   ]
 
   return input_types.includes(type.toLowerCase())
 }
 
 // Crop a string and add ... to it
-Utilz.get_limited_string = function (s, n) {
+Utilz.get_limited_string = (s, n) => {
   let title
 
   if (s.length > n) {
@@ -528,12 +528,12 @@ Utilz.get_limited_string = function (s, n) {
 }
 
 // Turn a string into safe HTML by replacing < and > to safe versions
-Utilz.make_html_safe = function (s) {
-  return s.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")
+Utilz.make_html_safe = (s) => {
+  return s.replace(/\</g, `&lt;`).replace(/\>/g, `&gt;`)
 }
 
 // Find the similarity between two strings
-Utilz.string_similarity = function (s1, s2) {
+Utilz.string_similarity = (s1, s2) => {
   let longer = s1
   let shorter = s2
 
@@ -552,7 +552,7 @@ Utilz.string_similarity = function (s1, s2) {
 }
 
 // Find the similarity distance between two strings
-Utilz.string_similarity_distance = function (s1, s2) {
+Utilz.string_similarity_distance = (s1, s2) => {
   s1 = s1.toLowerCase()
   s2 = s2.toLowerCase()
 
@@ -589,9 +589,9 @@ Utilz.string_similarity_distance = function (s1, s2) {
 }
 
 // Remove extra tabbing from the left side
-Utilz.untab_string = function (s) {
-  s = s.replace(/\t/gm, "  ")
-  let lines = s.split("\n")
+Utilz.untab_string = (s) => {
+  s = s.replace(/\t/gm, `  `)
+  let lines = s.split(`\n`)
 
   if (lines.length <= 1) {
     return s
@@ -622,18 +622,18 @@ Utilz.untab_string = function (s) {
   }
 
   let new_lines = []
-  let spaces = ""
+  let spaces = ``
 
   for (let i=0; i<pos; i++) {
-    spaces += " "
+    spaces += ` `
   }
 
   for (let line of lines) {
     let re = new RegExp(`(^${spaces})`)
-    new_lines.push(line.replace(re, ""))
+    new_lines.push(line.replace(re, ``))
   }
 
-  return new_lines.join("\n")
+  return new_lines.join(`\n`)
 }
 
 Utilz.MINUTE = 60000
@@ -642,12 +642,12 @@ Utilz.DAY = 86400000
 Utilz.YEAR = 31536000000
 
 // Return a timeago string
-Utilz.timeago = function (date) {
+Utilz.timeago = (date) => {
   let diff = Date.now() - date
   let s
 
   if (diff < Utilz.MINUTE) {
-    s = "just now"
+    s = `just now`
   }
   else if (diff < Utilz.HOUR) {
     let n = Math.floor(diff / 60 / 1000)
@@ -674,7 +674,8 @@ Utilz.timeago = function (date) {
 
     if (n === 1) {
       s = `${n} day ago`
-    } else {
+    }
+    else {
       s = `${n} days ago`
     }
   }
@@ -693,7 +694,7 @@ Utilz.timeago = function (date) {
 }
 
 // Fill from the left with c character to get to n ammount
-Utilz.fillpad = function (s, n, c) {
+Utilz.fillpad = (s, n, c) => {
   let olen = s.length
 
   for (let i=0; i<(n - olen); i++) {
@@ -704,62 +705,63 @@ Utilz.fillpad = function (s, n, c) {
 }
 
 // Get a nicely formatted time
-Utilz.get_time = function () {
+Utilz.get_time = () => {
   let c = Utilz.time_components(new Date())
   return `${c.hours}:${c.minutes}:${c.seconds}`
 }
 
 // Show information with date
-Utilz.loginfo = function (s) {
+Utilz.loginfo = (s) => {
   try {
     console.info(`[${Utilz.get_time()}] ${s}`)
-  } catch (err) {
+  }
+  catch (err) {
     console.error(err)
   }
 }
 
 // Make a url with a parameter that prevents caching
-Utilz.cache_bust_url = function (s) {
+Utilz.cache_bust_url = (s) => {
   let url = new URL(s)
-  url.searchParams.set("cache-buster", Date.now())
+  url.searchParams.set(`cache-buster`, Date.now())
   return url
 }
 
 // Check if file name is from an image source
-Utilz.is_image = function (src) {
+Utilz.is_image = (src) => {
   let extension = Utilz.get_extension(src).toLowerCase()
   return extension && Utilz.image_extensions.includes(extension)
 }
 
 // Check if file name is from a video source
-Utilz.is_video = function (src) {
+Utilz.is_video = (src) => {
   let extension = Utilz.get_extension(src).toLowerCase()
   return extension && Utilz.video_extensions.includes(extension)
 }
 
 // Check if file name is from an audio source
-Utilz.is_audio = function (src) {
+Utilz.is_audio = (src) => {
   let extension = Utilz.get_extension(src).toLowerCase()
   return extension && Utilz.audio_extensions.includes(extension)
 }
 
 // Check if all items in an array are equal
-Utilz.bingo = function (s) {
-  let split = s.split("").filter(x => x !== "")
+Utilz.bingo = (s) => {
+  let split = s.split(``).filter(x => x !== ``)
   return new Set(split).size === 1
 }
 
 // Get date time components, hours, minutes, seconds
-Utilz.time_components = function (ms) {
+Utilz.time_components = (ms) => {
   let date = new Date(ms)
-  let hours = Utilz.fillpad(date.getHours().toString(), 2, "0")
-  let minutes = Utilz.fillpad(date.getMinutes().toString(), 2, "0")
-  let seconds = Utilz.fillpad(date.getSeconds().toString(), 2, "0")
+  let hours = Utilz.fillpad(date.getHours().toString(), 2, `0`)
+  let minutes = Utilz.fillpad(date.getMinutes().toString(), 2, `0`)
+  let seconds = Utilz.fillpad(date.getSeconds().toString(), 2, `0`)
   return {hours: hours, minutes: minutes, seconds: seconds}
 }
 
 // Number range with a certain increment
-Utilz.number_range = function (to, from, increment) {
+Utilz.number_range = (to, from, increment) => {
   let numbers = []
   let n = to
 
@@ -776,17 +778,17 @@ Utilz.number_range = function (to, from, increment) {
 }
 
 // Get the middle item of an array
-Utilz.get_middle_item = function (arr) {
+Utilz.get_middle_item = (arr) => {
   return arr[Math.round((arr.length - 1) / 2)]
 }
 
 // Move an item in an array
-Utilz.move_in_array = function (arr, from, to) {
+Utilz.move_in_array = (arr, from, to) => {
   arr.splice(to, 0, arr.splice(from, 1)[0])
 }
 
 // Centralized function to create debouncers
-Utilz.create_debouncer = function (func, delay) {
+Utilz.create_debouncer = (func, delay) => {
   let timer
   let obj = {}
 
@@ -798,20 +800,20 @@ Utilz.create_debouncer = function (func, delay) {
     func(...args)
   }
 
-  obj.call = function (...args) {
+  obj.call = (...args) => {
     clear()
 
-    timer = setTimeout(function () {
+    timer = setTimeout(() => {
       run(...args)
     }, delay)
   }
 
-  obj.now = function (...args) {
+  obj.now = (...args) => {
     clear()
     run(...args)
   }
 
-  obj.cancel = function () {
+  obj.cancel = () => {
     clear()
   }
 
@@ -819,7 +821,7 @@ Utilz.create_debouncer = function (func, delay) {
 }
 
 // Centralized function to create throttles
-Utilz.create_throttle = function (func, delay) {
+Utilz.create_throttle = (func, delay) => {
   let timer
   let obj = {}
   let last_call = 0
@@ -833,7 +835,7 @@ Utilz.create_throttle = function (func, delay) {
     last_call = Date.now()
   }
 
-  obj.call = function (...args) {
+  obj.call = (...args) => {
     if ((Date.now() - last_call) > delay) {
       clear()
       run(...args)
@@ -841,7 +843,7 @@ Utilz.create_throttle = function (func, delay) {
     else {
       clear()
 
-      timer = setTimeout(function () {
+      timer = setTimeout(() => {
         run(...args)
       }, delay)
     }
@@ -851,21 +853,21 @@ Utilz.create_throttle = function (func, delay) {
 }
 
 // Select a single element
-Utilz.el = function (query, root = document) {
+Utilz.el = (query, root = document) => {
   return root.querySelector(query)
 }
 
 // Select an array of elements
-Utilz.els = function (query, root = document) {
+Utilz.els = (query, root = document) => {
   return Array.from(root.querySelectorAll(query))
 }
 
 // Select a single element or self
-Utilz.el_or_self = function (query, root = document) {
+Utilz.el_or_self = (query, root = document) => {
   let el = root.querySelector(query)
 
   if (!el) {
-    if (root.classList.contains(query.replace(".", ""))) {
+    if (root.classList.contains(query.replace(`.`, ``))) {
       el = root
     }
   }
@@ -874,11 +876,11 @@ Utilz.el_or_self = function (query, root = document) {
 }
 
 // Select an array of elements or self
-Utilz.els_or_self = function (query, root = document) {
+Utilz.els_or_self = (query, root = document) => {
   let els = Array.from(root.querySelectorAll(query))
 
   if (els.length === 0) {
-    if (root.classList.contains(query.replace(".", ""))) {
+    if (root.classList.contains(query.replace(`.`, ``))) {
       els = [root]
     }
   }
@@ -887,12 +889,12 @@ Utilz.els_or_self = function (query, root = document) {
 }
 
 // Clone element
-Utilz.clone = function (el) {
+Utilz.clone = (el) => {
   return el.cloneNode(true)
 }
 
 // Clone element children
-Utilz.clone_children = function (query) {
+Utilz.clone_children = (query) => {
   let items = []
   let children = Array.from(Utilz.el(query).children)
 
@@ -907,7 +909,7 @@ Utilz.dataset_obj = {}
 Utilz.dataset_id = 0
 
 // Data set manager
-Utilz.dataset = function (el, value, setvalue) {
+Utilz.dataset = (el, value, setvalue) => {
   if (!el) {
     return
   }
@@ -930,11 +932,11 @@ Utilz.dataset = function (el, value, setvalue) {
 }
 
 // Create an html element
-Utilz.create = function (type, classes = "", id = "") {
+Utilz.create = (type, classes = ``, id = ``) => {
   let el = document.createElement(type)
 
   if (classes) {
-    let classlist = classes.split(" ").filter(x => x != "")
+    let classlist = classes.split(` `).filter(x => x != ``)
 
     for (let cls of classlist) {
       el.classList.add(cls)
@@ -949,23 +951,23 @@ Utilz.create = function (type, classes = "", id = "") {
 }
 
 // Add an event listener
-Utilz.ev = function (element, action, callback, extra) {
+Utilz.ev = (element, action, callback, extra) => {
   element.addEventListener(action, callback, extra)
 }
 
 // Get a random choice from a list
-Utilz.random_choice = function (list) {
+Utilz.random_choice = (list) => {
   return list[Utilz.get_random_int(0, list.length - 1)]
 }
 
 // Get item coords
-Utilz.get_coords = function (el) {
+Utilz.get_coords = (el) => {
   let rect = el.getBoundingClientRect()
   return {x: rect.left, y: rect.top}
 }
 
 // Get singular or plural
-Utilz.plural = function (n, singular, plural) {
+Utilz.plural = (n, singular, plural) => {
   if (n === 1) {
     return `${n.toLocaleString()} ${singular}`
   }
@@ -975,7 +977,7 @@ Utilz.plural = function (n, singular, plural) {
 }
 
 // Get singular or plural without the number
-Utilz.plural_2 = function (n, singular, plural) {
+Utilz.plural_2 = (n, singular, plural) => {
   if (n === 1) {
     return singular
   }
@@ -985,51 +987,51 @@ Utilz.plural_2 = function (n, singular, plural) {
 }
 
 // Get url hostname
-Utilz.get_hostname = function (url) {
+Utilz.get_hostname = (url) => {
   let url_obj
 
   try {
     url_obj = new URL(url)
   }
   catch (err) {
-    return ""
+    return ``
   }
 
   return url_obj.hostname
 }
 
 // Check if urls match
-Utilz.urls_equal = function (u1, u2) {
+Utilz.urls_equal = (u1, u2) => {
   return Utilz.remove_slashes_end(u1) === Utilz.remove_slashes_end(u2)
 }
 
 // Remove slashes from ending
-Utilz.remove_slashes_end = function (s) {
-  return s.replace(/\/+$/g, "")
+Utilz.remove_slashes_end = (s) => {
+  return s.replace(/\/+$/g, ``)
 }
 
 // Remove hash from url
-Utilz.remove_hash = function (url) {
-  return url.split("#")[0]
+Utilz.remove_hash = (url) => {
+  return url.split(`#`)[0]
 }
 
 // The way to format urls
-Utilz.format_url = function (url) {
+Utilz.format_url = (url) => {
   return Utilz.remove_slashes_end(Utilz.remove_hash(url))
 }
 
 // Capitalize first letter of a string
-Utilz.capitalize = function (s) {
+Utilz.capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 // Check if item's protocol is http
-Utilz.is_http = function (item) {
-  return item.protocol === "http:" || item.protocol === "https:"
+Utilz.is_http = (item) => {
+  return item.protocol === `http:` || item.protocol === `https:`
 }
 
 // Copy text to the clipboard
-Utilz.copy_to_clipboard = function (text, feedback = false) {
+Utilz.copy_to_clipboard = (text, feedback = false) => {
   navigator.clipboard.writeText(text)
 
   if (feedback) {
@@ -1038,14 +1040,35 @@ Utilz.copy_to_clipboard = function (text, feedback = false) {
 }
 
 // Remove protocol like https://
-Utilz.remove_protocol = function (url) {
-  return url.replace(/^https?:\/\//, "")
+Utilz.remove_protocol = (url) => {
+  return url.replace(/^https?:\/\//, ``)
 }
 
-Utilz.media_types = ["image", "tv"]
-Utilz.video_extensions = ["mp4", "webm"]
-Utilz.video_types = ["video/mp4", "video/webm"]
-Utilz.audio_extensions = ["mp3", "ogg", "wav", "flac"]
-Utilz.audio_types = ["audio/mpeg", "audio/ogg", "audio/wav", "audio/flac"]
-Utilz.image_extensions = ["jpg", "jpeg", "png", "gif", "webp", "bmp"]
-Utilz.image_types = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp"]
+App.log = (message, mode = `normal`) => {
+  let icon
+
+  if (mode === `normal`) {
+    icon = `🟢`
+  }
+  else if (mode === `error`) {
+    icon = `🔴`
+  }
+
+  console.info(`${icon} Log: ${message}`)
+}
+
+App.bool = (string) => {
+  return string.toLowerCase() === `true`
+}
+
+App.unquote = (text) => {
+  return text.replace(/^"(.*)"$/, `$1`)
+}
+
+Utilz.media_types = [`image`, `tv`]
+Utilz.video_extensions = [`mp4`, `webm`]
+Utilz.video_types = [`video/mp4`, `video/webm`]
+Utilz.audio_extensions = [`mp3`, `ogg`, `wav`, `flac`]
+Utilz.audio_types = [`audio/mpeg`, `audio/ogg`, `audio/wav`, `audio/flac`]
+Utilz.image_extensions = [`jpg`, `jpeg`, `png`, `gif`, `webp`, `bmp`]
+Utilz.image_types = [`image/jpeg`, `image/png`, `image/gif`, `image/webp`, `image/bmp`]
