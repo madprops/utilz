@@ -1057,12 +1057,20 @@ Utilz.log = (message, mode = `normal`) => {
   console.info(`${icon} Log: ${message}`)
 }
 
+// Parse bool string
 Utilz.bool = (string) => {
   return string.toLowerCase() === `true`
 }
 
+// Remove "quotes from a string"
 Utilz.unquote = (text) => {
   return text.replace(/^"(.*)"$/, `$1`)
+}
+
+// Rotate an array forwards or backwards
+Utilz.rotate_array = (arr, count) => {
+  let len = arr.length
+  arr.push(...arr.splice(0, (- count % len + len) % len))
 }
 
 Utilz.media_types = [`image`, `tv`]
