@@ -116,14 +116,10 @@ Utilz.random_sequence = (n) => {
 Utilz.get_youtube_id = (url) => {
   let v_id = false
   let list_id = false
-
   let split = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/)
   let id = undefined !== split[2] ? split[2].split(/[^0-9a-z_\-]/i)[0] : split[0]
-
   v_id = id.length === 11 ? id : false
-
   let list_match = url.match(/(?:\?|&)(list=[0-9A-Za-z_-]+)/)
-
   let index_match = url.match(/(?:\?|&)(index=[0-9]+)/)
 
   if (list_match) {
@@ -390,7 +386,6 @@ Utilz.get_urls = (s) => {
 // Crop a text from the left and add ...
 Utilz.slice_string_end = (s, n = 10) => {
   s = s.trim()
-
   let sliced = s.slice(-n).trim()
 
   if (s.length > sliced.length) {
@@ -485,8 +480,13 @@ Utilz.singular_or_plural = (n, s) => {
 Utilz.is_textbox = (element) => {
   let tag_name = element.tagName.toLowerCase()
 
-  if (tag_name === `textarea`) return true
-  if (tag_name !== `input`) return false
+  if (tag_name === `textarea`) {
+    return true
+  }
+
+  if (tag_name !== `input`) {
+    return false
+  }
 
   let type = element.getAttribute(`type`)
 
