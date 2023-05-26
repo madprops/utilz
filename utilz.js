@@ -970,6 +970,11 @@ Utilz.rotate_array = (arr, count) => {
   arr.push(...arr.splice(0, (- count % len + len) % len))
 }
 
+// Return true if active element has a class
+Utilz.focused_with_class = (cls) => {
+  return document.activeElement.classList.contains(cls)
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
