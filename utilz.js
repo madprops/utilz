@@ -984,6 +984,43 @@ App.element_is_visible = (el) => {
   return top_visible && bottom_visible
 }
 
+// Find objects with the same property
+Utilz.find_duplicates = (objects, property) => {
+  let frequency_map = objects.reduce((map, obj) => {
+    map[obj[property]] = (map[obj[property]] || 0) + 1
+    return map
+  }, {})
+
+  return objects.filter(obj => frequency_map[obj[property]] > 1)
+}
+
+// Remove excess duplicates
+Utilz.get_excess = (objects, property) => {
+  let items = {}
+  let excess = []
+
+  for (let obj of objects) {
+    if (items[obj[property]]) {
+      excess.push(obj)
+    }
+    else {
+      items[obj[property]] = obj
+    }
+  }
+
+  return excess
+}
+
+// Container is at top
+Utilz.is_at_top = (container) => {
+  return container.scrollTop === 0
+}
+
+// Container is at bottom
+Utilz.is_at_bottom = (container) => {
+  return container.scrollTop + container.clientHeight === container.scrollHeight
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
