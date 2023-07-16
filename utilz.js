@@ -2,7 +2,7 @@ const Utilz = {}
 
 // Clean string util
 Utilz.single_space = (s) => {
-  return s.replace(/\s+/g, ` `).trim()
+  return s.replace(/\s+/g, ` `)
 }
 
 // Clean string util
