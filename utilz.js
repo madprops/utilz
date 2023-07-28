@@ -789,6 +789,16 @@ Utilz.move_in_array = (arr, from, to) => {
 
 // Centralized function to create debouncers
 Utilz.create_debouncer = (func, delay) => {
+  if (typeof func !== `function`) {
+    console.error(`Invalid function`)
+    return
+  }
+
+  if (!delay) {
+    console.error(`Invalid debouncer delay`)
+    return
+  }
+
   let timer
   let obj = {}
 
