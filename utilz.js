@@ -55,9 +55,14 @@ Utilz.remove_pre_empty_lines = (s) => {
   }
 }
 
-// Clean string util
+// No empty lines
 Utilz.single_linebreak = (s) => {
-  return s.replace(/[\n\r]+/g, `\n`).replace(/ +/g, ` `).trim()
+  return s.replace(/(\n\s*){2,}/g, `\n\n`).replace(/ +/g, ` `).trim()
+}
+
+// Max 1 empty line
+Utilz.double_linebreak = (s) => {
+  return s.replace(/(\n\s*){3,}/g, `\n\n`).replace(/ +/g, ` `).trim()
 }
 
 // Get a random int from min to max. Optional exclude a number
