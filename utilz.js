@@ -65,9 +65,16 @@ Utilz.double_linebreak = (s) => {
   return s.replace(/(\n\s*){3,}/g, `\n\n`).replace(/ +/g, ` `).trim()
 }
 
-// Get a random int from min to max. Optional exclude a number
-Utilz.get_random_int = (min, max, exclude = undefined) => {
-  let num = Math.floor(Math.random() * (max - min + 1) + min)
+// Get a random int from min to max. Optional exclude a number. Optional seeded random function
+Utilz.get_random_int = (min, max, exclude = undefined, random_function) => {
+  let num
+
+  if (random_function) {
+    num = Math.floor(random_function() * (max - min + 1) + min)
+  }
+  else {
+    num = Math.floor(Math.random() * (max - min + 1) + min)
+  }
 
   if (exclude !== undefined) {
     if (num === exclude) {
