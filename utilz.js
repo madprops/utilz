@@ -1076,6 +1076,27 @@ Utils.seeded_random = (str) => {
   }
 }
 
+// Parse a certain kind of delay string
+// 1_seconds 5_seconds
+// 1_minutes 5_minutes
+// 1_hours 5_hours
+Utilz.parse_delay = (s) => {
+  let delay
+  let split = s.split(`_`)
+
+  if (split[1] === `seconds`) {
+    delay = split[0] * 1000
+  }
+  else if (split[1] === `minutes`) {
+    delay = split[0] * 1000 * 60
+  }
+  else if (split[1] === `hours`) {
+    delay = split[0] * 1000 * 60 * 60
+  }
+
+  return delay
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
