@@ -875,8 +875,8 @@ Utilz.create_throttle = (func, delay) => {
 }
 
 // Get a random choice from a list
-Utilz.random_choice = (list) => {
-  return list[Utilz.get_random_int(0, list.length - 1)]
+Utilz.random_choice = (list, rand) => {
+  return list[App.get_random_int(0, list.length - 1, undefined, rand)]
 }
 
 // Get item coords
