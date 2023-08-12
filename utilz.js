@@ -1,5 +1,15 @@
 const Utilz = {}
 
+// Only chars
+Utilz.only_chars = (s) => {
+  return s.replace(/[^\w]/g, ``)
+}
+
+// No spaces
+Utilz.no_space = (s) => {
+  return s.replace(/\s+/g, ``)
+}
+
 // Clean string util
 Utilz.single_space = (s) => {
   return s.replace(/\s+/g, ` `)
@@ -66,7 +76,7 @@ Utilz.double_linebreak = (s) => {
 }
 
 // Get a random int from min to max. Optional exclude a number. Optional seeded random function
-Utilz.get_random_int = (min, max, exclude = undefined, random_function) => {
+Utilz.random_int = (min, max, exclude = undefined, random_function) => {
   let num
 
   if (random_function) {
@@ -107,7 +117,7 @@ Utilz.get_random_string = (n) => {
   let possible = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
 
   for (let i=0; i<n; i++) {
-    text += possible[Utilz.get_random_int(0, possible.length - 1)]
+    text += possible[Utilz.random_int(0, possible.length - 1)]
   }
 
   return text
@@ -118,7 +128,7 @@ Utilz.random_sequence = (n) => {
   let s = ``
 
   for (let i=0; i<n; i++) {
-    s += Utilz.get_random_int(0, 9)
+    s += Utilz.random_int(0, 9)
   }
 
   return s
@@ -545,7 +555,7 @@ Utilz.make_html_safe = (s) => {
 }
 
 // Find the similarity between two strings
-Utilz.string_similarity = (s1, s2) => {
+Utilz.similarity = (s1, s2) => {
   let longer = s1
   let shorter = s2
 
@@ -560,11 +570,11 @@ Utilz.string_similarity = (s1, s2) => {
     return 1.0
   }
 
-  return (longer_length - Utilz.string_similarity_distance(longer, shorter)) / parseFloat(longer_length)
+  return (longer_length - Utilz.similarity_distance(longer, shorter)) / parseFloat(longer_length)
 }
 
 // Find the similarity distance between two strings
-Utilz.string_similarity_distance = (s1, s2) => {
+Utilz.similarity_distance = (s1, s2) => {
   s1 = s1.toLowerCase()
   s2 = s2.toLowerCase()
 
@@ -876,7 +886,7 @@ Utilz.create_throttle = (func, delay) => {
 
 // Get a random choice from a list
 Utilz.random_choice = (list, rand) => {
-  return list[App.get_random_int(0, list.length - 1, undefined, rand)]
+  return list[Utilz.random_int(0, list.length - 1, undefined, rand)]
 }
 
 // Get item coords
@@ -998,7 +1008,7 @@ Utilz.focused_with_class = (cls) => {
 }
 
 // Return true if element is fully visible
-App.element_is_visible = (el) => {
+Utilz.element_is_visible = (el) => {
   let container_rect = el.parentElement.getBoundingClientRect()
   let rect = el.getBoundingClientRect()
   let top_visible = rect.top >= container_rect.top - 2
