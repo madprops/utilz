@@ -1115,6 +1115,24 @@ Utilz.parse_delay = (s) => {
   return delay
 }
 
+// Get line where the caret is
+App.get_line_under_caret = (textarea) => {
+  let pos = textarea.selectionStart
+  let text = textarea.value
+  let start = pos
+  let end = pos
+
+  while ((start > 0) && (text[start - 1] !== `\n`)) {
+    start--
+  }
+
+  while ((end < text.length) && (text[end] !== `\n`)) {
+    end++
+  }
+
+  return text.substring(start, end).trim()
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
