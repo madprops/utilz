@@ -317,14 +317,27 @@ Utilz.get_imgur_image_code = (src) => {
   }
 }
 
-// Capitalize words in a sentence
-Utilz.capitalize_words = (s) => {
-  let ns = s.toLowerCase()
-    .split(` `)
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(` `)
+// Capitalize one word
+Utilz.capitalize = (s) => {
+  let w = s.charAt(0).toUpperCase() + s.slice(1)
+  let lower = w.toLowerCase()
 
-  return ns
+  if (lower === `url`) {
+    w = `URL`
+  }
+
+  return w
+}
+
+// Capitalize all words
+Utilz.capitalize_words = (s) => {
+  let words = s.split(` `)
+
+  let capitalized = words.map(word => {
+    return Utilz.capitalize(word)
+  })
+
+  return capitalized.join(` `)
 }
 
 // Make a string of nicely separated items
@@ -947,11 +960,6 @@ Utilz.remove_hash = (url) => {
 // The way to format urls
 Utilz.format_url = (url) => {
   return Utilz.remove_slashes_end(Utilz.remove_hash(url))
-}
-
-// Capitalize first letter of a string
-Utilz.capitalize = (s) => {
-  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 // Check if item's protocol is http
