@@ -730,6 +730,7 @@ Utilz.timeago = (date) => {
 
 // Fill from the left with c character to get to n ammount
 Utilz.fillpad = (s, n, c) => {
+  s = s.toString()
   let olen = s.length
 
   for (let i=0; i<(n - olen); i++) {
