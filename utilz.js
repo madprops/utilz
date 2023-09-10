@@ -1134,6 +1134,11 @@ App.get_line_under_caret = (textarea) => {
   return text.substring(start, end).trim()
 }
 
+// Remove extension from string
+Utilz.remove_extension = (s) => {
+  return s.split(`.`).slice(0, -1).join(`.`)
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
