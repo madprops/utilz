@@ -1139,6 +1139,21 @@ Utilz.remove_extension = (s) => {
   return s.split(`.`).slice(0, -1).join(`.`)
 }
 
+// Return an array of number strings from start to end
+Utilz.numstrings = (start, end) => {
+  let nums = []
+
+  if (start >= end) {
+    return nums
+  }
+
+  for (let i=start; i<=end; i++) {
+    nums.push(i.toString())
+  }
+
+  return nums
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
