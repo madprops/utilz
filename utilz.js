@@ -1150,6 +1150,15 @@ Utilz.numstrings = (start, end) => {
   return nums
 }
 
+// Fill object with def args
+Utilz.def_args = (def, args) => {
+  for (let key in def) {
+    if ((args[key] === undefined) && (def[key] !== undefined)) {
+      args[key] = def[key]
+    }
+  }
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
