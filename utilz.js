@@ -1159,6 +1159,11 @@ Utilz.def_args = (def, args) => {
   }
 }
 
+// Deselect a text input
+App.input_deselect = (input) => {
+  input.selectionStart = input.selectionEnd
+}
+
 Utilz.media_types = [`image`, `tv`]
 Utilz.video_extensions = [`mp4`, `webm`]
 Utilz.video_types = [`video/mp4`, `video/webm`]
