@@ -1165,8 +1165,15 @@ Utilz.def_args = (def, args) => {
 }
 
 // Deselect a text input
-App.input_deselect = (input) => {
+Utilz.input_deselect = (input) => {
   input.selectionStart = input.selectionEnd
+}
+
+// Sort alphabetically taking numbers into account
+Utilz.sort_alpha = (array) => {
+  array.sort((a, b) => {
+    return a.localeCompare(b, undefined, {numeric: true, sensitivity: `base`})
+  })
 }
 
 Utilz.media_types = [`image`, `tv`]
