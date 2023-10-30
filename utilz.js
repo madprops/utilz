@@ -1095,6 +1095,11 @@ Utils.seeded_random = (str) => {
   }
 }
 
+// Place cursor at end
+Utils.cursor_at_end = (input) => {
+  input.setSelectionRange(input.value.length, input.value.length)
+}
+
 // Parse a certain kind of delay string
 // 1_seconds 5_seconds
 // 1_minutes 5_minutes
