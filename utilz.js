@@ -1063,7 +1063,7 @@ Utilz.is_at_bottom = (container) => {
 }
 
 // Get seed for the other function
-Utils.get_seed = (str) => {
+Utilz.get_seed = (str) => {
   let h1 = 1779033703, h2 = 3144134277,
   h3 = 1013904242, h4 = 2773480762
 
@@ -1084,8 +1084,8 @@ Utils.get_seed = (str) => {
 }
 
 // Seeded random number generator based on a string
-Utils.seeded_random = (str) => {
-  let num = Utils.get_seed(str)[0]
+Utilz.seeded_random = (str) => {
+  let num = Utilz.get_seed(str)[0]
 
   return function() {
     let t = num += 0x6D2B79F5
@@ -1096,7 +1096,7 @@ Utils.seeded_random = (str) => {
 }
 
 // Place cursor at end
-Utils.cursor_at_end = (input) => {
+Utilz.cursor_at_end = (input) => {
   input.setSelectionRange(input.value.length, input.value.length)
 }
 
