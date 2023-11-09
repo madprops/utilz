@@ -331,10 +331,10 @@ Utilz.capitalize = (s) => {
 
 // Capitalize all words
 Utilz.capitalize_words = (s) => {
-  let words = s.split(` `)
+  let words = s.split(/[_\s]+/)
 
   let capitalized = words.map(word => {
-    return Utilz.capitalize(word)
+    return App.capitalize(word)
   })
 
   return capitalized.join(` `)
