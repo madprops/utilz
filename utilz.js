@@ -12,7 +12,7 @@ Utilz.no_space = (s) => {
 
 // Clean string util
 Utilz.single_space = (s) => {
-  return s.replace(/\s+/g, ` `)
+  return s.replace(/ +/g, ` `)
 }
 
 // Clean string util
@@ -1183,3 +1183,8 @@ Utilz.audio_extensions = [`mp3`, `ogg`, `wav`, `flac`]
 Utilz.audio_types = [`audio/mpeg`, `audio/ogg`, `audio/wav`, `audio/flac`]
 Utilz.image_extensions = [`jpg`, `jpeg`, `png`, `gif`, `webp`, `bmp`]
 Utilz.image_types = [`image/jpeg`, `image/png`, `image/gif`, `image/webp`, `image/bmp`]
+
+// Check if it's a regex string
+Utilz.is_regex = (str) => {
+  return str.startsWith(`/`) && str.endsWith(`/`)
+}
