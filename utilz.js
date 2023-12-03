@@ -102,7 +102,7 @@ Utilz.random_int = (min, max, exclude = undefined, random_function) => {
 
 // Shuffle an array
 Utilz.shuffle_array = (array) => {
-  for (let i=array.length-1; i>0; i--) {
+  for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1))
     let temp = array[i]
     array[i] = array[j]
@@ -116,7 +116,7 @@ Utilz.get_random_string = (n) => {
 
   let possible = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
 
-  for (let i=0; i<n; i++) {
+  for (let i = 0; i < n; i++) {
     text += possible[Utilz.random_int(0, possible.length - 1)]
   }
 
@@ -127,7 +127,7 @@ Utilz.get_random_string = (n) => {
 Utilz.random_sequence = (n) => {
   let s = ``
 
-  for (let i=0; i<n; i++) {
+  for (let i = 0; i < n; i++) {
     s += Utilz.random_int(0, 9)
   }
 
@@ -344,7 +344,7 @@ Utilz.capitalize_words = (s) => {
 Utilz.nice_list = (list) => {
   let s = ``
 
-  for (let i=0; i<list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     let item = list[i]
 
     if (i === 0) {
@@ -593,7 +593,7 @@ Utilz.similarity_distance = (s1, s2) => {
 
   let costs = new Array()
 
-  for (let i=0; i<=s1.length; i++) {
+  for (let i = 0; i <= s1.length; i++) {
     let last_value = i
 
     for (let j = 0; j <= s2.length; j++) {
@@ -659,7 +659,7 @@ Utilz.untab_string = (s) => {
   let new_lines = []
   let spaces = ``
 
-  for (let i=0; i<pos; i++) {
+  for (let i = 0; i < pos; i++) {
     spaces += ` `
   }
 
@@ -733,7 +733,7 @@ Utilz.fillpad = (s, n, c) => {
   s = s.toString()
   let olen = s.length
 
-  for (let i=0; i<(n - olen); i++) {
+  for (let i = 0; i < (n - olen); i++) {
     s = c + s
   }
 
@@ -1067,7 +1067,7 @@ Utilz.get_seed = (str) => {
   let h1 = 1779033703, h2 = 3144134277,
   h3 = 1013904242, h4 = 2773480762
 
-  for (let i=0, k; i<str.length; i++) {
+  for (let i = 0, k; i < str.length; i++) {
     k = str.charCodeAt(i)
     h1 = h2 ^ Math.imul(h1 ^ k, 597399067)
     h2 = h3 ^ Math.imul(h2 ^ k, 2869860233)
@@ -1148,7 +1148,7 @@ Utilz.remove_extension = (s) => {
 Utilz.numstrings = (start, end) => {
   let nums = []
 
-  for (let i=start; i<=end; i++) {
+  for (let i = start; i <= end; i++) {
     nums.push(i.toString())
   }
 
