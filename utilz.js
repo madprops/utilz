@@ -1188,3 +1188,9 @@ Utilz.image_types = [`image/jpeg`, `image/png`, `image/gif`, `image/webp`, `imag
 Utilz.is_regex = (str) => {
   return str.startsWith(`/`) && str.endsWith(`/`)
 }
+
+// Check 'item' and 'items'
+Utilz.item_or_items = (value, what) => {
+  let items = [what, `${what}s`]
+  return items.some(v => value.includes(v))
+}
