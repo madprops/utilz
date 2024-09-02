@@ -1194,3 +1194,14 @@ Utilz.item_or_items = (value, what) => {
   let items = [what, `${what}s`]
   return items.some(v => value.includes(v))
 }
+
+// Add https if protocol is missing
+Utilz.fix_url = (url) => {
+  url = url.toLowerCase().trim()
+
+  if (!url.startsWith(`http://`) && !url.startsWith(`https://`)) {
+    url = `https://${url}`
+  }
+
+  return url
+}
