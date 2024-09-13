@@ -334,7 +334,7 @@ Utilz.capitalize_words = (s) => {
   let words = s.split(/[_\s]+/)
 
   let capitalized = words.map(word => {
-    return App.capitalize(word)
+    return Utilz.capitalize(word)
   })
 
   return capitalized.join(` `)
@@ -1122,7 +1122,7 @@ Utilz.parse_delay = (s) => {
 }
 
 // Get line where the caret is
-App.get_line_under_caret = (textarea) => {
+Utilz.get_line_under_caret = (textarea) => {
   let pos = textarea.selectionStart
   let text = textarea.value
   let start = pos
@@ -1204,4 +1204,16 @@ Utilz.fix_url = (url) => {
   }
 
   return url
+}
+
+// Get quoted parts from a string
+Utilz.get_quotes = (s) => {
+  let regex = /"([^"]*)"/g
+  let matches = s.match(regex) || []
+  return matches.map(m => m.replace(/"/g, ``))
+}
+
+// Remove quotes from a string
+Utilz.remove_quotes = (s) => {
+  return s.replace(/"/g, ``)
 }
