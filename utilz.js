@@ -1217,3 +1217,6 @@ Utilz.get_quotes = (s) => {
 Utilz.remove_quotes = (s) => {
   return s.replace(/"/g, ``)
 }
+
+// Async sleep function
+Utilz.sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
