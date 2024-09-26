@@ -1198,8 +1198,9 @@ Utilz.item_or_items = (value, what) => {
 // Add https if protocol is missing
 Utilz.fix_url = (url) => {
   url = url.toLowerCase().trim()
+  let protocols = [`http://`, `https://`]
 
-  if (!url.startsWith(`http://`) && !url.startsWith(`https://`)) {
+  if (!protocols.some(p => url.startsWith(p))) {
     url = `https://${url}`
   }
 
