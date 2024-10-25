@@ -100,7 +100,7 @@ Utilz.random_int = (min, max, exclude = undefined, random_function) => {
   return num
 }
 
-// Shuffle an array
+// Shuffle an array in place
 Utilz.shuffle_array = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1))
@@ -108,6 +108,14 @@ Utilz.shuffle_array = (array) => {
     array[i] = array[j]
     array[j] = temp
   }
+}
+
+// Shuffle an array copied
+Utilz.shuffle_array_copy = (array) => {
+  return array
+    .map(value => ({value, sort: Math.random()}))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({value}) => value)
 }
 
 // Get a random string of n length
@@ -1221,3 +1229,8 @@ Utilz.remove_quotes = (s) => {
 
 // Async sleep function
 Utilz.sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+// Clone if it's a node
+Utilz.clone_if_node = (el) => {
+  return el instanceof Node ? el.cloneNode(true) : el
+}
