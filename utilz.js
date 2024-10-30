@@ -834,12 +834,12 @@ Utilz.move_in_array = (arr, from, to) => {
 // Centralized function to create debouncers
 Utilz.create_debouncer = (func, delay) => {
   if (typeof func !== `function`) {
-    console.error(`Invalid debouncer function`)
+    App.error(`Invalid debouncer function`)
     return
   }
 
-  if (!delay) {
-    console.error(`Invalid debouncer delay`)
+  if ((typeof delay !== `number`) || (delay < 1)) {
+    App.error(`Invalid debouncer delay`)
     return
   }
 
@@ -848,6 +848,7 @@ Utilz.create_debouncer = (func, delay) => {
 
   function clear () {
     clearTimeout(timer)
+    timer = undefined
   }
 
   function run (...args) {
@@ -860,6 +861,14 @@ Utilz.create_debouncer = (func, delay) => {
     timer = setTimeout(() => {
       run(...args)
     }, delay)
+  }
+
+  obj.call_2 = (...args) => {
+    if (timer) {
+      return
+    }
+
+    obj.call(args)
   }
 
   obj.now = (...args) => {
