@@ -680,60 +680,83 @@ Utilz.untab_string = (s) => {
 }
 
 Utilz.MINUTE = 60000
-Utilz.HOUR = 3600000
-Utilz.DAY = 86400000
-Utilz.YEAR = 31536000000
+Utilz.HOUR = Utilz.MINUTE * 60
+Utilz.DAY = Utilz.HOUR * 24
+Utilz.MONTH = Utilz.DAY * 30
+Utilz.YEAR = Utilz.DAY * 365
 
 // Return a timeago string
 Utilz.timeago = (date) => {
-  let diff = Date.now() - date
-  let s
+  let level = 0
+  let diff = Utilz.now() - date
+  let result
 
   if (diff < Utilz.MINUTE) {
-    s = `just now`
+    result = `just now`
+    level = 1
   }
   else if (diff < Utilz.HOUR) {
-    let n = Math.floor(diff / 60 / 1000)
+    let n = parseInt(diff / Utilz.MINUTE)
 
     if (n === 1) {
-      s = `${n} minute ago`
+      result = `${n} minute ago`
     }
     else {
-      s = `${n} minutes ago`
+      result = `${n} minutes ago`
     }
+
+    level = 2
   }
-  else if (diff >= Utilz.HOUR && diff < Utilz.DAY) {
-    let n = Math.floor(diff / 60 / 60 / 1000)
+  else if ((diff >= Utilz.HOUR) && (diff < Utilz.DAY)) {
+    let n = parseInt(diff / Utilz.HOUR)
 
     if (n === 1) {
-      s = `${n} hour ago`
+      result = `${n} hour ago`
     }
     else {
-      s = `${n} hours ago`
+      result = `${n} hours ago`
     }
+
+    level = 3
   }
-  else if (diff >= Utilz.DAY && diff < Utilz.YEAR) {
-    let n = Math.floor(diff / 24 / 60 / 60 / 1000)
+  else if ((diff >= Utilz.DAY) && (diff < Utilz.MONTH)) {
+    let n = parseInt(diff / Utilz.DAY)
 
     if (n === 1) {
-      s = `${n} day ago`
+      result = `${n} day ago`
     }
     else {
-      s = `${n} days ago`
+      result = `${n} days ago`
     }
+
+    level = 4
+  }
+  else if ((diff >= Utilz.MONTH) && (diff < Utilz.YEAR)) {
+    let n = parseInt(diff / Utilz.MONTH)
+
+    if (n === 1) {
+      result = `${n} month ago`
+    }
+    else {
+      result = `${n} months ago`
+    }
+
+    level = 5
   }
   else if (diff >= Utilz.YEAR) {
-    let n = Math.floor(diff / 365 / 24 / 60 / 60 / 1000)
+    let n = parseInt(diff / Utilz.YEAR)
 
     if (n === 1) {
-      s = `${n} year ago`
+      result = `${n} year ago`
     }
     else {
-      s = `${n} years ago`
+      result = `${n} years ago`
     }
+
+    level = 6
   }
 
-  return s
+  return [result, level]
 }
 
 // Fill from the left with c character to get to n ammount
