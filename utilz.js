@@ -688,7 +688,7 @@ Utilz.YEAR = Utilz.DAY * 365
 // Return a timeago string
 Utilz.timeago = (date) => {
   let level = 0
-  let diff = Utilz.now() - date
+  let diff = Date.now() - date
   let result
 
   if (diff < Utilz.MINUTE) {
